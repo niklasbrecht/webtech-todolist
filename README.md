@@ -3,6 +3,8 @@
 ### Gruppe ###
 Niklas Sebastian Brecht, 582766
 
+Timothy Kumm, 582089
+
 ### Projektbeschreibung ###
 Das Projekt umfasst eine To-Do-Liste mit Aufgaben, welche man bis zu einer bestimmten Deadline erledigen möchte.
 
