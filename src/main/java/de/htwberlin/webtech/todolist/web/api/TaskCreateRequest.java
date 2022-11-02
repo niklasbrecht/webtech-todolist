@@ -1,58 +1,51 @@
 package de.htwberlin.webtech.todolist.web.api;
 
+import java.sql.Date;
+
 public class TaskCreateRequest {
 
-    private String taskname;
-    private String subject;
-    private int year;
-    private int month;
-    private int day;
+    private String titel;
+    private String inhalt;
+    private Date datum;
+    private long benutzer_id;
 
-    public TaskCreateRequest(String taskname, String subject, int year, int month, int day) {
-        this.taskname = taskname;
-        this.subject = subject;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+    public TaskCreateRequest(String titel, String inhalt, Date datum, long benutzer_id) {
+        this.titel = titel;
+        this.inhalt = inhalt;
+        this.datum = datum;
+        this.benutzer_id = benutzer_id;
     }
 
-    public String getTaskname() {
-        return taskname;
+    public String getTitel() {
+        return titel;
     }
 
-    public void setTaskname(String taskname) {
-        this.taskname = taskname;
+    public void setTitel(String titel) {
+        this.titel = titel;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getInhalt() {
+        return inhalt;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setInhalt(String inhalt) {
+        this.inhalt = inhalt;
     }
 
-    public int getYear() {
-        return year;
+    public Date getDatum() {
+        return datum;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
 
-    public int getMonth() {
-        return month;
+    public long getBenutzer_id() {
+        return benutzer_id;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setBenutzer_id(long benutzer_id) {
+        this.benutzer_id = benutzer_id;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
 }

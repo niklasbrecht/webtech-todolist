@@ -1,8 +1,10 @@
 package de.htwberlin.webtech.todolist.persistence;
 
+import java.sql.Date;
+
 import javax.persistence.*;
 
-@Entity(name = "tasks")
+@Entity(name = "aufgabe")
 public class TaskEntity {
 
     @Id
@@ -10,27 +12,24 @@ public class TaskEntity {
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "task_name", nullable = false)
-    private String taskname;
+    @Column(name = "titel")
+    private String titel;
 
-    @Column(name = "subject")
-    private String subject;
+    @Column(name = "inhalt")
+    private String inhalt;
 
-    @Column(name = "year", nullable = false)
-    private int year;
+    @Column(name = "datum")
+    private Date datum;
 
-    @Column(name = "month", nullable = false)
-    private int month;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "benutzer_id", nullable = false)
+    private long benutzer_id;
 
-    @Column(name = "day", nullable = false)
-    private int day;
-
-    public TaskEntity(String taskname, String subject, int year, int month, int day) {
-        this.taskname = taskname;
-        this.subject = subject;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+    public TaskEntity(String titel, String inhalt, Date datum, long benutzer_id) {
+        this.titel = titel;
+        this.inhalt = inhalt;
+        this.datum = datum;
+        this.benutzer_id = benutzer_id;
     }
 
     protected TaskEntity(){
@@ -41,43 +40,36 @@ public class TaskEntity {
         return id;
     }
 
-    public String getTaskname() {
-        return taskname;
+    public String getTitel() {
+        return titel;
     }
 
-    public void setTaskname(String taskname) {
-        this.taskname = taskname;
+    public void setTitel(String titel) {
+        this.titel = titel;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getInhalt() {
+        return inhalt;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setInhalt(String inhalt) {
+        this.inhalt = inhalt;
     }
 
-    public int getYear() {
-        return year;
+    public Date getDatum() {
+        return datum;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
 
-    public int getMonth() {
-        return month;
+    public long getBenutzer_id() {
+        return benutzer_id;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setBenutzer_id(long benutzer_id) {
+        this.benutzer_id = benutzer_id;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
 }
