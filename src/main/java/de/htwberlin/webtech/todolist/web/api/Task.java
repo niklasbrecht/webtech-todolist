@@ -2,20 +2,22 @@ package de.htwberlin.webtech.todolist.web.api;
 
 import java.sql.Date;
 
+import de.htwberlin.webtech.todolist.persistence.UserEntity;
+
 public class Task {
 
     private long id;
     private String titel;
     private String inhalt;
     private Date datum;
-    private long benutzer_id;
+    private UserEntity benutzer;
 
-    public Task(long id, String titel, String inhalt, Date datum, long benutzer_id) {
+    public Task(long id, String titel, String inhalt, Date datum, UserEntity benutzer) {
         this.id = id;
         this.titel = titel;
         this.inhalt = inhalt;
         this.datum = datum;
-        this.benutzer_id = benutzer_id;
+        this.benutzer = benutzer;
     }
 
     public long getId() {
@@ -50,12 +52,8 @@ public class Task {
         this.datum = datum;
     }
 
-    public long getBenutzer_id() {
-        return benutzer_id;
-    }
-
-    public void setBenutzer_id(long benutzer_id) {
-        this.benutzer_id = benutzer_id;
+    public UserEntity getBenutzer() {
+        return this.benutzer;         //prints out on page
     }
     
 }

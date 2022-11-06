@@ -21,15 +21,14 @@ public class TaskEntity {
     @Column(name = "datum")
     private Date datum;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "benutzer_id", nullable = false)
-    private long benutzer_id;
+    @ManyToOne(targetEntity = UserEntity.class)
+    @JoinColumn(name = "benutzer_id")
+    private UserEntity benutzer;
 
-    public TaskEntity(String titel, String inhalt, Date datum, long benutzer_id) {
+    public TaskEntity(String titel, String inhalt, Date datum) {
         this.titel = titel;
         this.inhalt = inhalt;
         this.datum = datum;
-        this.benutzer_id = benutzer_id;
     }
 
     protected TaskEntity(){
@@ -64,12 +63,8 @@ public class TaskEntity {
         this.datum = datum;
     }
 
-    public long getBenutzer_id() {
-        return benutzer_id;
-    }
-
-    public void setBenutzer_id(long benutzer_id) {
-        this.benutzer_id = benutzer_id;
+    public UserEntity getBenutzer() {
+        return benutzer;
     }
 
 }

@@ -26,7 +26,7 @@ public class TaskService {
     }
 
     public Task create(TaskCreateRequest req){
-        var taskEntity = new TaskEntity(req.getTitel(), req.getInhalt(), req.getDatum(), req.getBenutzer_id());
+        var taskEntity = new TaskEntity(req.getTitel(), req.getInhalt(), req.getDatum());
         taskRepository.save(taskEntity);
         return transformEntity(taskEntity);
     }
@@ -59,7 +59,7 @@ public class TaskService {
                 taskEntity.getTitel(),
                 taskEntity.getInhalt(),
                 taskEntity.getDatum(),
-                taskEntity.getBenutzer_id()
+                taskEntity.getBenutzer()
         );
     }
 }
