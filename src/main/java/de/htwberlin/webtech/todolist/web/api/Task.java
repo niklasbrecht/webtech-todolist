@@ -1,21 +1,23 @@
 package de.htwberlin.webtech.todolist.web.api;
 
+import java.sql.Date;
+
+import de.htwberlin.webtech.todolist.persistence.UserEntity;
+
 public class Task {
 
     private long id;
-    private String taskname;
-    private String subject;
-    private int year;
-    private int month;
-    private int day;
+    private String titel;
+    private String inhalt;
+    private Date datum;
+    private UserEntity benutzer;
 
-    public Task(long id, String taskname, String subject, int year, int month, int day) {
+    public Task(long id, String titel, String inhalt, Date datum, UserEntity benutzer) {
         this.id = id;
-        this.taskname = taskname;
-        this.subject = subject;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        this.titel = titel;
+        this.inhalt = inhalt;
+        this.datum = datum;
+        this.benutzer = benutzer;
     }
 
     public long getId() {
@@ -26,43 +28,32 @@ public class Task {
         this.id = id;
     }
 
-    public String getTaskname() {
-        return taskname;
+    public String getTitel() {
+        return titel;
     }
 
-    public void setTaskname(String taskname) {
-        this.taskname = taskname;
+    public void setTitel(String titel) {
+        this.titel = titel;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getInhalt() {
+        return inhalt;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setInhalt(String inhalt) {
+        this.inhalt = inhalt;
     }
 
-    public int getYear() {
-        return year;
+    public Date getDatum() {
+        return datum;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
 
-    public int getMonth() {
-        return month;
+    public UserEntity getBenutzer() {
+        return this.benutzer;         //prints out on page
     }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
+    
 }

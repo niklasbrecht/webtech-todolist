@@ -26,7 +26,7 @@ public class TaskService {
     }
 
     public Task create(TaskCreateRequest req){
-        var taskEntity = new TaskEntity(req.getTaskname(), req.getSubject(), req.getYear(), req.getMonth(), req.getDay());
+        var taskEntity = new TaskEntity(req.getTitel(), req.getInhalt(), req.getDatum());
         taskRepository.save(taskEntity);
         return transformEntity(taskEntity);
     }
@@ -40,11 +40,9 @@ public class TaskService {
         var taskEntityOptional = taskRepository.findById(id);
         if(taskEntityOptional.isEmpty()) return null;
         var taskEntity = taskEntityOptional.get();
-        taskEntity.setTaskname(req.getTaskname());
-        taskEntity.setSubject(req.getSubject());
-        taskEntity.setYear(req.getYear());
-        taskEntity.setMonth(req.getMonth());
-        taskEntity.setDay(req.getDay());
+        taskEntity.setTitel(req.getTitel());
+        taskEntity.setInhalt(req.getInhalt());
+        taskEntity.setDatum(req.getDatum());
         taskEntity = taskRepository.save(taskEntity);
         return transformEntity(taskEntity);
     }
@@ -58,11 +56,10 @@ public class TaskService {
     private Task transformEntity(TaskEntity taskEntity){
         return new Task(
                 taskEntity.getId(),
-                taskEntity.getTaskname(),
-                taskEntity.getSubject(),
-                taskEntity.getDay(),
-                taskEntity.getMonth(),
-                taskEntity.getYear()
+                taskEntity.getTitel(),
+                taskEntity.getInhalt(),
+                taskEntity.getDatum(),
+                taskEntity.getBenutzer()
         );
     }
 }
