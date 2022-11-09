@@ -27,6 +27,8 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .antMatchers("/api/v*/tasks/**")
+                .permitAll()
                 .antMatchers("/api/v*/registration/**")
                 .permitAll()
                 .anyRequest()
@@ -35,7 +37,7 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
