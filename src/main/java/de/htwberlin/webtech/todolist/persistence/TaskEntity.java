@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
-@Entity(name = "aufgabe")
+@Entity(name = "tasks")
 public class TaskEntity {
 
     @Id
@@ -22,7 +22,7 @@ public class TaskEntity {
     private Date datum;
 
     @ManyToOne(targetEntity = UserEntity.class)
-    @JoinColumn(name = "benutzer_id")
+    @JoinColumn(name = "user_id")
     private UserEntity benutzer;
 
     public TaskEntity(String titel, String inhalt, Date datum) {

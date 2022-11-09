@@ -1,9 +1,13 @@
 package de.htwberlin.webtech.todolist.persistence;
 
-import javax.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity(name = "benutzer")
-public class UserEntity {
+import javax.persistence.*;
+import java.util.Collection;
+
+@Entity(name = "users")
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +26,62 @@ public class UserEntity {
     @Column(name = "passwort", nullable = false)
     private String passwort;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private UserRole userRole;
+
+    public UserEntity(String vorname, String nachname, String email, String passwort, UserRole role) {
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.email = email;
+        this.passwort = passwort;
+        this.userRole = role;
+    }
+
     public UserEntity(String vorname, String nachname, String email, String passwort) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.email = email;
         this.passwort = passwort;
+        this.userRole = UserRole.USER;
     }
 
     protected UserEntity(){
+    }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return passwort;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public long getId() {

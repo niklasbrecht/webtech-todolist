@@ -4,18 +4,26 @@ import de.htwberlin.webtech.todolist.persistence.UserEntity;
 import de.htwberlin.webtech.todolist.persistence.UserRepository;
 import de.htwberlin.webtech.todolist.web.api.User;
 import de.htwberlin.webtech.todolist.web.api.UserCreateRequest;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final String userNotFound = "Nutzer mit der Mail %s wurde nicht gefunden!";
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository) {
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public List<User> findAll(){
@@ -62,5 +70,21 @@ public class UserService {
                 userEntity.getEmail(),
                 userEntity.getPasswort()
         );
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        return userRepository.findByEmail(mail)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(userNotFound, mail)));
+    }
+
+    public void signUpUser(UserEntity user) {
+        boolean userExists = userRepository
+                .findByEmail(user.getEmail())
+                .isPresent();
+        if(userExists) throw new IllegalStateException("Mail wird bereits für ein Konto verwendet!");
+        String encodedPassword = bCryptPasswordEncoder.encode((user.getPassword()));
+        user.setPasswort(encodedPassword);
+        userRepository.save(user);
     }
 }
