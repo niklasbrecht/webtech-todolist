@@ -44,6 +44,11 @@ public class UserService implements UserDetailsService {
         return userEntity.map(this::transformEntity).orElse(null);
     }
 
+    public UserEntity findByIdRaw(Long id){
+        var user = userRepository.findById(id);
+        return user.orElse(null);
+    }
+
     public User update(Long id, UserCreateRequest req){
         var userEntityOptional = userRepository.findById(id);
         if(userEntityOptional.isEmpty()) return null;

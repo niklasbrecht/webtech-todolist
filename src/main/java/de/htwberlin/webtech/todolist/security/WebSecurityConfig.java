@@ -27,6 +27,8 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .antMatchers("/api/v*/user/**")
+                .permitAll()
                 .antMatchers("/api/v*/tasks/**")
                 .permitAll()
                 .antMatchers("/api/v*/registration/**")

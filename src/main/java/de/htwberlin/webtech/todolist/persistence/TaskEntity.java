@@ -31,6 +31,13 @@ public class TaskEntity {
         this.datum = datum;
     }
 
+    public TaskEntity(String titel, String inhalt, Date datum, UserEntity benutzer) {
+        this.titel = titel;
+        this.inhalt = inhalt;
+        this.datum = datum;
+        this.benutzer = benutzer;
+    }
+
     protected TaskEntity(){
 
     }

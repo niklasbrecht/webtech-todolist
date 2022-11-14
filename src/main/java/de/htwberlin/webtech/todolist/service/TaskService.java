@@ -13,9 +13,11 @@ import java.util.stream.Collectors;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final UserService userService;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, UserService userService) {
         this.taskRepository = taskRepository;
+        this.userService = userService;
     }
 
     public List<Task> findAll(){
@@ -26,7 +28,7 @@ public class TaskService {
     }
 
     public Task create(TaskCreateRequest req){
-        var taskEntity = new TaskEntity(req.getTitel(), req.getInhalt(), req.getDatum());
+        var taskEntity = new TaskEntity(req.getTitel(), req.getInhalt(), req.getDatum(), userService.findByIdRaw(req.getBenutzer_id()));
         taskRepository.save(taskEntity);
         return transformEntity(taskEntity);
     }
