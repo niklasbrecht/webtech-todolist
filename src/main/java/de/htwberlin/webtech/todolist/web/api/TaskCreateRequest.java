@@ -16,6 +16,8 @@ public class TaskCreateRequest {
         this.benutzer_id = benutzer_id;
     }
 
+    public TaskCreateRequest() {}
+
     public String getTitel() {
         return titel;
     }

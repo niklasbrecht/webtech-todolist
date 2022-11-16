@@ -2,7 +2,6 @@ package de.htwberlin.webtech.todolist.web.api;
 
 public class UserCreateRequest {
 
-    private long id;
     private String vorname;
     private String nachname;
     private String email;
@@ -14,6 +13,8 @@ public class UserCreateRequest {
         this.email = email;
         this.passwort = passwort;
     }
+
+    public UserCreateRequest() {}
 
     public String getVorname() {
         return vorname;
