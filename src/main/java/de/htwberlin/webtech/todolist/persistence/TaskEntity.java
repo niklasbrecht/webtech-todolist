@@ -22,7 +22,7 @@ public class TaskEntity {
     private Date datum;
 
     @ManyToOne(targetEntity = UserEntity.class)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity benutzer;
 
     public TaskEntity(String titel, String inhalt, Date datum) {
