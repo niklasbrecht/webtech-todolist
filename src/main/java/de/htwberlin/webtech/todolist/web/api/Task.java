@@ -52,8 +52,8 @@ public class Task {
         this.datum = datum;
     }
 
-    public UserEntity getBenutzer() {
-        return this.benutzer;         //prints out on page
+    public long getBenutzer() {
+        return benutzer.getId();         //prints out on page
     }
-    
+
 }
