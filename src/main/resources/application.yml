@@ -22,3 +22,6 @@ spring:
     init:
       platform: postgres
       mode: always
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
