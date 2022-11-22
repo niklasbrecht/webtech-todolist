@@ -1,8 +1,10 @@
 package de.htwberlin.webtech.todolist.web;
 
 
-import de.htwberlin.webtech.todolist.persistence.TaskRepository;
+import com.google.common.base.Strings;
 import de.htwberlin.webtech.todolist.service.TaskService;
+import de.htwberlin.webtech.todolist.service.TokenService;
+import de.htwberlin.webtech.todolist.service.UserService;
 import de.htwberlin.webtech.todolist.web.api.Task;
 import de.htwberlin.webtech.todolist.web.api.TaskCreateRequest;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,7 @@ public class TaskRestController {
 
     private final TaskService taskService;
 
-    public TaskRestController(TaskService taskService) {
+    public TaskRestController(TaskService taskService, TokenService tokenService, UserService userService) {
         this.taskService = taskService;
     }
 
@@ -53,4 +55,24 @@ public class TaskRestController {
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
+    @GetMapping(path = "/api/v2/tasks")
+    public ResponseEntity<List<Task>> fetchUserTasks(@RequestHeader("Authorization") String authHeader){
+        if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        List<Task> tasks = taskService.findByToken(authHeader.substring(7));
+        if(tasks == null) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(tasks);
+    }
+
+    @PostMapping(path = "/api/v2/tasks")
+    public ResponseEntity<Void> createTask(@RequestHeader("Authorization") String authHeader,
+                                           @RequestBody TaskCreateRequest req) throws URISyntaxException {
+        if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        var task = taskService.createByToken(authHeader.substring(7), req);
+        URI uri = new URI("/api/v2/tasks/" + task.getId());
+        return ResponseEntity.created(uri).build();
+    }
 }

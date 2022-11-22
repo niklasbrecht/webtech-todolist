@@ -92,4 +92,8 @@ public class UserService implements UserDetailsService {
         user.setPasswort(encodedPassword);
         userRepository.save(user);
     }
+
+    public Long findIdByEmail(String email){
+        return userRepository.getIdByMail(email);
+    }
 }

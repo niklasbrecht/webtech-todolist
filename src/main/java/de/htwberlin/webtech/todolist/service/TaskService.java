@@ -1,5 +1,7 @@
 package de.htwberlin.webtech.todolist.service;
 
+import antlr.Token;
+import com.nimbusds.jwt.JWTParser;
 import de.htwberlin.webtech.todolist.persistence.TaskEntity;
 import de.htwberlin.webtech.todolist.persistence.TaskRepository;
 import de.htwberlin.webtech.todolist.web.api.Task;
@@ -14,10 +16,12 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final UserService userService;
+    private final TokenService tokenService;
 
-    public TaskService(TaskRepository taskRepository, UserService userService) {
+    public TaskService(TaskRepository taskRepository, UserService userService, TokenService tokenService) {
         this.taskRepository = taskRepository;
         this.userService = userService;
+        this.tokenService = tokenService;
     }
 
     public List<Task> findAll(){
@@ -53,6 +57,33 @@ public class TaskService {
         if(!taskRepository.existsById(id)) return false;
         taskRepository.deleteById(id);
         return true;
+    }
+
+    public List<Task> findByToken(String token){
+        try {
+            var userMail = tokenService.decodeToken(token);
+            Long userId = userService.findIdByEmail(userMail);
+            var taskEntity = taskRepository.findAllByBenutzer(userId);
+            return taskEntity.stream()
+                    .map(this::transformEntity)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public Task createByToken(String token, TaskCreateRequest req){
+        try {
+            var userMail = tokenService.decodeToken(token);
+            Long userId = userService.findIdByEmail(userMail);
+            var taskEntity = new TaskEntity(req.getTitel(), req.getInhalt(), req.getDatum(), userService.findByIdRaw(userId));
+            taskRepository.save(taskEntity);
+            return transformEntity(taskEntity);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Task transformEntity(TaskEntity taskEntity){
