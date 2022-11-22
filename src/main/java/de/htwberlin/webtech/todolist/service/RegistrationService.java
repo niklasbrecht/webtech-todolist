@@ -30,6 +30,7 @@ public class RegistrationService {
                 .collect(Collectors.toList());
     }
     public String register(RegistrationRequest request) {
+        System.out.println("Checkpoint");
         boolean isMailValid = mailValidator.test(request.getEmail());
         if(!isMailValid) throw new IllegalStateException("Keine gütlige Mail-Adresse!");
         userService.signUpUser(

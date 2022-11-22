@@ -16,6 +16,12 @@ public class TaskCreateRequest {
         this.benutzer_id = benutzer_id;
     }
 
+    public TaskCreateRequest(String titel, String inhalt, Date datum) {
+        this.titel = titel;
+        this.inhalt = inhalt;
+        this.datum = datum;
+    }
+
     public TaskCreateRequest() {}
 
     public String getTitel() {

@@ -20,6 +20,7 @@ public class RegistrationController {
     @PostMapping(path = "/api/v1/registration")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String register(@RequestBody RegistrationRequest request) {
+        System.out.println("Controller Called");
         return registrationService.register(request);
     }
 
