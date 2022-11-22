@@ -11,12 +11,13 @@ public class WebConfig implements WebMvcConfigurer{
 
 @Override
 public void addCorsMappings(CorsRegistry registry) {
-    registry.addMapping("/api/**")
+    registry.addMapping("/api/v1/**")
         .allowedMethods("*")
         .allowedOrigins(
+                "http://localhost:8080",
             "http://localhost:8081",
             "https://webtech-git-frontend.herokuapp.com/"
             );
 }
-    
+
 }
