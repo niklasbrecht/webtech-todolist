@@ -1,5 +1,6 @@
 package de.htwberlin.webtech.todolist.service;
 
+import com.google.common.base.Strings;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;

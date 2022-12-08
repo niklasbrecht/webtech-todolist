@@ -6,6 +6,7 @@ import de.htwberlin.webtech.todolist.persistence.TaskEntity;
 import de.htwberlin.webtech.todolist.persistence.TaskRepository;
 import de.htwberlin.webtech.todolist.web.api.Task;
 import de.htwberlin.webtech.todolist.web.api.TaskCreateRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,10 +54,10 @@ public class TaskService {
         return transformEntity(taskEntity);
     }
 
-    public boolean deleteById(Long id){
-        if(!taskRepository.existsById(id)) return false;
+    public ResponseEntity<Void> deleteById(Long id){
+        if(!taskRepository.existsById(id)) return ResponseEntity.notFound().build();
         taskRepository.deleteById(id);
-        return true;
+        return ResponseEntity.ok().build();
     }
 
     public List<Task> findByToken(String token){
@@ -71,7 +72,6 @@ public class TaskService {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public Task createByToken(String token, TaskCreateRequest req){

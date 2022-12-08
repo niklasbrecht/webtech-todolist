@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                         .antMatchers("/api/v1/login").permitAll()
                         .antMatchers("/api/v2/auth").permitAll()
                         .antMatchers("/api/v2/tasks").permitAll()
+                        .antMatchers("/api/v2/tasks/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

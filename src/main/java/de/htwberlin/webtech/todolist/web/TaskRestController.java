@@ -51,8 +51,7 @@ public class TaskRestController {
 
     @DeleteMapping(path = "/api/v1/tasks/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id){
-        boolean successful = taskService.deleteById(id);
-        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return taskService.deleteById(id);
     }
 
     @GetMapping(path = "/api/v2/tasks")
@@ -74,5 +73,13 @@ public class TaskRestController {
         var task = taskService.createByToken(authHeader.substring(7), req);
         URI uri = new URI("/api/v2/tasks/" + task.getId());
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping(path = "/api/v2/tasks/{id}")
+    public ResponseEntity<Void> deleteTask(@RequestHeader("Authorization") String authHeader, @PathVariable Long id){
+        if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return taskService.deleteById(id);
     }
 }
