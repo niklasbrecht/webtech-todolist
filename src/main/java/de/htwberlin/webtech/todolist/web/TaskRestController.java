@@ -2,6 +2,7 @@ package de.htwberlin.webtech.todolist.web;
 
 
 import com.google.common.base.Strings;
+import com.nimbusds.jose.shaded.json.JSONObject;
 import de.htwberlin.webtech.todolist.service.TaskService;
 import de.htwberlin.webtech.todolist.service.TokenService;
 import de.htwberlin.webtech.todolist.service.UserService;
@@ -65,14 +66,14 @@ public class TaskRestController {
     }
 
     @PostMapping(path = "/api/v2/tasks")
-    public ResponseEntity<Void> createTask(@RequestHeader("Authorization") String authHeader,
+    public ResponseEntity<?> createTask(@RequestHeader("Authorization") String authHeader,
                                            @RequestBody TaskCreateRequest req) throws URISyntaxException {
         if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         var task = taskService.createByToken(authHeader.substring(7), req);
         URI uri = new URI("/api/v2/tasks/" + task.getId());
-        return ResponseEntity.created(uri).build();
+        return new ResponseEntity<String>(Long.toString(task.getId()), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/api/v2/tasks/{id}")
