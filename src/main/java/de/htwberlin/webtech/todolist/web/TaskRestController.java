@@ -76,6 +76,15 @@ public class TaskRestController {
         return new ResponseEntity<String>(Long.toString(task.getId()), HttpStatus.CREATED);
     }
 
+    @PutMapping(path = "/api/v2/tasks/{id}")
+    public ResponseEntity<Task> updateTask(@RequestHeader("Authorization") String authHeader, @PathVariable Long id, @RequestBody TaskCreateRequest request){
+        if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        var task = taskService.update(id, request);
+        return task != null? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping(path = "/api/v2/tasks/{id}")
     public ResponseEntity<Void> deleteTask(@RequestHeader("Authorization") String authHeader, @PathVariable Long id){
         if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
