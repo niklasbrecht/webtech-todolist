@@ -16,10 +16,7 @@ public class TaskEntityTest {
         final TaskEntity taskEntity = new TaskEntity("title", "content", Date.valueOf(LocalDate.now()), userEntity);
 
         // Expected result
-        final String expected = """
-                TaskEntity{titel='title', inhalt='content', datum=" + Date.valueOf(LocalDate.now()) + ",
-                benutzer=UserEntity{vorname='vname', nachname='nname', email='email', passwort='passwort', userRole=USER}}
-                """;
+        final String expected = "TaskEntity{titel='title', inhalt='content', datum=" + Date.valueOf(LocalDate.now()) + ", benutzer=UserEntity{vorname='vname', nachname='nname', email='email', passwort='passwort', userRole=USER}}";
 
         // Actual result
         final String actual = taskEntity.toString();
