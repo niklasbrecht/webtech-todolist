@@ -45,6 +45,8 @@ public class WebSecurityConfig {
                 .authorizeRequests( auth -> auth
                         // Permit all requests to the registration endpoint including Post requests
                         .antMatchers("/api/v1/registration").permitAll()
+                        // Permit all requests to Hellow World endpoint for test reasons
+                        .antMatchers("/helloworld").permitAll()
                         // Permit all requests to the login endpoint
                         .antMatchers("/api/v1/login").permitAll()
                         .antMatchers("/api/v2/auth").permitAll()
