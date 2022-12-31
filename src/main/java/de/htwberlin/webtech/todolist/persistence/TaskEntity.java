@@ -74,4 +74,13 @@ public class TaskEntity {
         return benutzer;
     }
 
+    @Override
+    public String toString() {
+        return "TaskEntity{" +
+                "titel='" + titel + '\'' +
+                ", inhalt='" + inhalt + '\'' +
+                ", datum=" + datum +
+                ", benutzer=" + benutzer.toString() +
+                '}';
+    }
 }

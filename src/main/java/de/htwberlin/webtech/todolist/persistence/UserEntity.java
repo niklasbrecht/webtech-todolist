@@ -119,4 +119,14 @@ public class UserEntity implements UserDetails {
         this.passwort = passwort;
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
+                ", email='" + email + '\'' +
+                ", passwort='" + passwort + '\'' +
+                ", userRole=" + userRole +
+                '}';
+    }
 }
