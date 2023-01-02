@@ -48,7 +48,7 @@ public class WebSecurityConfig {
                         // Permit all requests to Hellow World endpoint for test reasons
                         .antMatchers("/helloworld").permitAll()
                         // Permit all requests to the login endpoint
-                        .antMatchers("/api/v1/*").hasIpAddress("127.0.0.1")
+                        .antMatchers("/api/v1/**").hasIpAddress("127.0.0.1")
                         .antMatchers("/api/v2/auth").permitAll()
                         .antMatchers("/api/v2/tasks").permitAll()
                         .antMatchers("/api/v2/tasks/*").permitAll()

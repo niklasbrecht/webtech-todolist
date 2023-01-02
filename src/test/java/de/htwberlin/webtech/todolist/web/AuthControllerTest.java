@@ -35,9 +35,6 @@ public class AuthControllerTest {
     @Autowired
     private WebApplicationContext context;
 
-    String username = "test@gradle.com";
-    String password = "m7kP20nQbDRi";
-
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders
@@ -50,7 +47,7 @@ public class AuthControllerTest {
     @Test
     void testSuccessfullLogin() throws Exception {
         MvcResult result = mockMvc.perform(post("/api/v2/auth")
-                        .with(httpBasic(username, password)))
+                        .with(httpBasic("test@gradle.com", "m7kP20nQbDRi")))
                 .andExpect(status().isOk())
                 .andReturn();
 
