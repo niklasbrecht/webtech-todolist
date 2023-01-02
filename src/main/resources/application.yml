@@ -23,5 +23,5 @@ spring:
       platform: postgres
       mode: always
 rsa:
-  private-key: classpath:certs/private.pem
-  public-key: classpath:certs/public.pem
+  private-key: classpath:testonlyCerts/private.pem
+  public-key: classpath:testonlyCerts/public.pem
