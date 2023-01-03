@@ -11,10 +11,10 @@ Das Projekt umfasst eine To-Do-Liste mit Aufgaben, welche man bis zu einer besti
 ### Funktionen ###
 1. `Aufgabe erstellen`
 2. `Aufgabe entfernen`
-3. `Deadline verändern`
+3. `Eigenschaften verändern`
 4. `Nach Deadline sortieren`
-5. `Themengebiet zuordnen`
-6. `Nach Themengebiet sortieren`
-7. `(Mit Nutzerlogin)`
+5. `Nutzer login`
+6. `(Nutzerregistrierung)`
+
 
 
