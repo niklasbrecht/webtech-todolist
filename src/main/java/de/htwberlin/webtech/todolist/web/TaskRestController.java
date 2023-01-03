@@ -2,10 +2,7 @@ package de.htwberlin.webtech.todolist.web;
 
 
 import com.google.common.base.Strings;
-import com.nimbusds.jose.shaded.json.JSONObject;
 import de.htwberlin.webtech.todolist.service.TaskService;
-import de.htwberlin.webtech.todolist.service.TokenService;
-import de.htwberlin.webtech.todolist.service.UserService;
 import de.htwberlin.webtech.todolist.web.api.Task;
 import de.htwberlin.webtech.todolist.web.api.TaskCreateRequest;
 import org.springframework.http.HttpStatus;
@@ -21,7 +18,7 @@ public class TaskRestController {
 
     private final TaskService taskService;
 
-    public TaskRestController(TaskService taskService, TokenService tokenService, UserService userService) {
+    public TaskRestController(TaskService taskService) {
         this.taskService = taskService;
     }
 
@@ -39,6 +36,8 @@ public class TaskRestController {
 
     @PostMapping(path = "/api/v1/tasks")
     public ResponseEntity<Void> createTask(@RequestBody TaskCreateRequest request) throws URISyntaxException {
+       var valid = validate(request);
+       if(!valid) return ResponseEntity.badRequest().build();
        var task = taskService.create(request);
        URI uri = new URI("/api/v1/tasks/" + task.getId());
        return ResponseEntity.created(uri).build();
@@ -71,6 +70,8 @@ public class TaskRestController {
         if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+        var valid = validate(req);
+        if(!valid) return ResponseEntity.badRequest().build();
         var task = taskService.createByToken(authHeader.substring(7), req);
         URI uri = new URI("/api/v2/tasks/" + task.getId());
         return new ResponseEntity<String>(Long.toString(task.getId()), HttpStatus.CREATED);
@@ -91,5 +92,13 @@ public class TaskRestController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return taskService.deleteById(id);
+    }
+
+    private boolean validate(TaskCreateRequest request) {
+        return request.getTitel() != null
+                && !request.getTitel().isBlank()
+                && request.getInhalt() != null
+                && !request.getTitel().isBlank()
+                && request.getDatum() != null;
     }
 }
