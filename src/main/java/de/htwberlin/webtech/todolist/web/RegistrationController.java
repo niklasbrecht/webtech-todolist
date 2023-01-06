@@ -17,7 +17,7 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
-    @PostMapping(path = "/api/v1/registration")
+    @PostMapping(path = "/api/v2/registration")
     @ResponseStatus(code = HttpStatus.CREATED)
     public String register(@RequestBody RegistrationRequest request) {
         return registrationService.register(request);

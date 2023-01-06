@@ -154,5 +154,4 @@ public class TaskRestControllerTest {
                 .header("Authorization", "Bearer " + Jwt))
                 .andExpect(status().isOk());
     }
-
 }

@@ -44,7 +44,7 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .authorizeRequests( auth -> auth
                         // Permit all requests to the registration endpoint including Post requests
-                        .antMatchers("/api/v1/registration").permitAll()
+                        .antMatchers("/api/v2/registration").permitAll()
                         // Permit all requests to Hellow World endpoint for test reasons
                         .antMatchers("/helloworld").permitAll()
                         // Permit all requests to the login endpoint
