@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,6 +23,7 @@ public class TaskRestController {
         this.taskService = taskService;
     }
 
+    // All V1 endpoints are deprecated and are not reachable from the outside
     @GetMapping(path = "/api/v1/tasks")
     @ResponseStatus(code = HttpStatus.OK)
     public List<Task> fetchTasks(){
@@ -35,7 +37,7 @@ public class TaskRestController {
     }
 
     @PostMapping(path = "/api/v1/tasks")
-    public ResponseEntity<Void> createTask(@RequestBody TaskCreateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createTask(@Valid @RequestBody TaskCreateRequest request) throws URISyntaxException {
        var valid = validate(request);
        if(!valid) return ResponseEntity.badRequest().build();
        var task = taskService.create(request);
@@ -66,7 +68,7 @@ public class TaskRestController {
 
     @PostMapping(path = "/api/v2/tasks")
     public ResponseEntity<?> createTask(@RequestHeader("Authorization") String authHeader,
-                                           @RequestBody TaskCreateRequest req) throws URISyntaxException {
+                                           @Valid @RequestBody TaskCreateRequest req) throws URISyntaxException {
         if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -78,7 +80,7 @@ public class TaskRestController {
     }
 
     @PutMapping(path = "/api/v2/tasks/{id}")
-    public ResponseEntity<Task> updateTask(@RequestHeader("Authorization") String authHeader, @PathVariable Long id, @RequestBody TaskCreateRequest request){
+    public ResponseEntity<Task> updateTask(@RequestHeader("Authorization") String authHeader, @PathVariable Long id, @Valid @RequestBody TaskCreateRequest request){
         if(Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

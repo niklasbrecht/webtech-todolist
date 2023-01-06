@@ -1,6 +1,7 @@
 package de.htwberlin.webtech.todolist.web;
 
 import de.htwberlin.webtech.todolist.service.UserService;
+import de.htwberlin.webtech.todolist.web.api.TaskCreateRequest;
 import de.htwberlin.webtech.todolist.web.api.User;
 import de.htwberlin.webtech.todolist.web.api.UserCreateRequest;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,8 @@ public class UserRestController {
     public UserRestController(UserService userService) {
         this.userService = userService;
     }
+
+    // Since V1-Endpoints are deprecated, the requests do not have to be validated
 
     @GetMapping(path = "/api/v1/user")
     @ResponseStatus(code = HttpStatus.OK)
@@ -50,5 +53,4 @@ public class UserRestController {
         boolean successful = userService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
-
 }

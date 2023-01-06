@@ -1,12 +1,22 @@
 package de.htwberlin.webtech.todolist.web.api;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class UserCreateRequest {
 
+    @NotBlank(message = "The name must not be empty.")
     private String vorname;
+
+    @NotBlank(message = "The surname must not be empty.")
     private String nachname;
+
+    @Email(message = "The email must be a valid email address.")
     private String email;
+
+    @NotBlank(message = "The password must not be empty.")
     private String passwort;
-    
+
     public UserCreateRequest(String vorname, String nachname, String email, String passwort) {
         this.vorname = vorname;
         this.nachname = nachname;
@@ -47,6 +57,4 @@ public class UserCreateRequest {
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }
-
-
 }

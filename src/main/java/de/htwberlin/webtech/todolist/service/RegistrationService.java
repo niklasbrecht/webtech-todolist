@@ -29,10 +29,9 @@ public class RegistrationService {
                 .map(this::transformEntity)
                 .collect(Collectors.toList());
     }
-    public String register(RegistrationRequest request) {
-        System.out.println("Checkpoint");
+    public boolean register(RegistrationRequest request) {
         boolean isMailValid = mailValidator.test(request.getEmail());
-        if(!isMailValid) throw new IllegalStateException("Keine gütlige Mail-Adresse!");
+        if(!isMailValid) return false;
         userService.signUpUser(
                 new UserEntity(
                         request.getVorname(),
@@ -42,7 +41,7 @@ public class RegistrationService {
                         UserRole.USER
                 )
         );
-        return "Success";
+        return true;
     }
 
     private User transformEntity(UserEntity userEntity){

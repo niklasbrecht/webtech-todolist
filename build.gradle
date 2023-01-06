@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     testImplementation 'junit:junit:4.13.1'
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

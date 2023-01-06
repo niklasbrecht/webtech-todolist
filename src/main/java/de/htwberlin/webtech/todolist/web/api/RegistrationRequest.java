@@ -1,10 +1,20 @@
 package de.htwberlin.webtech.todolist.web.api;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class RegistrationRequest {
 
+    @NotBlank(message = "The name must not be empty.")
     private String vorname;
+
+    @NotBlank(message = "The surname must not be empty.")
     private String nachname;
+
+    @Email(message = "The email must be a valid email address.")
     private String email;
+
+    @NotBlank(message = "The password must not be empty.")
     private String passwort;
 
     public RegistrationRequest(String vorname, String nachname, String email, String passwort) {

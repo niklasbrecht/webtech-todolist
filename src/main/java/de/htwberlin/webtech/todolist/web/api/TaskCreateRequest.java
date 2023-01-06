@@ -1,12 +1,22 @@
 package de.htwberlin.webtech.todolist.web.api;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 public class TaskCreateRequest {
 
+    @Size(min = 1, max = 255, message = "The title must be between 1 and 255 characters long.")
     private String titel;
+
+    @NotBlank(message = "The content must not be empty.")
     private String inhalt;
+
+    @NotNull(message = "The due date must not be empty.")
     private Date datum;
+
+    @NotNull(message = "The user_id must not be empty.")
     private long benutzer_id;
 
     public TaskCreateRequest(String titel, String inhalt, Date datum, long benutzer_id) {
