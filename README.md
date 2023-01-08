@@ -23,3 +23,5 @@ Das Projekt umfasst eine To-Do-Liste mit Aufgaben, welche man bis zu einer besti
 Die Spring Anwendung verwendet zur Verschlüsselung der JSON-Web-Tokens die Zertifikate im Ordner 'testonlyCerts'. Diese Zertifikate sind nur zur erfolgreichen Testausführung auf Github. Die echten Zertifikate wurden aus Sicherheitsgründen nicht nach Github gepusht.
 
 
+### Wie funktioniert die Anwendung ###
+Um die App vollständig zu benutzen, muss erst ein Nutzeraccount angelegt werden. Ist der Account angelegt, kann man sich Ein- und Ausloggen. Im eingeloggten Zustand lassen sich unter dem Reiter "Tasks" einzelne Aufgaben mit einem Titel, Inhalt und der jeweiligen Deadline anlegen, verändern und löschen. Mit einem Klick auf das Datums-Feld lassen sich die Aufgaben nach ihrer Deadline sortieren. Mit einer Eingabe in das Suchfeld oberhalb der Tabelle lassen sich die Tasks nach ihrem Titel durchsuchen. 
