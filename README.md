@@ -20,7 +20,7 @@ Das Projekt umfasst eine To-Do-Liste mit Aufgaben, welche man bis zu einer besti
 6. `Nutzer Login/Registrierung`
 
 ### Hinweis ### 
-Die Spring-Anwendung verwendet zur Verschlüsselung der JSON-Web-Tokens die Zertifikate im Ordner 'testonlyCerts'. Diese Zertifikate sind nur zur erfolgreichen Testausführung auf Github. Die echten Zertifikate wurden aus Sicherheitsgründen nicht nach Github gepusht. Auch das Heroku-Frontend verwendet diese testonlyCerts, da die Verwendung von Umgebungsvariabeln im Dateiformat bei Heroku zusätzlich Geld kostet.
+Die Spring-Anwendung verwendet zur Verschlüsselung der JSON-Web-Tokens die Zertifikate im Ordner 'testonlyCerts'. Diese Zertifikate sind nur zur erfolgreichen Testausführung auf Github. Die echten Zertifikate wurden aus Sicherheitsgründen nicht nach Github gepusht. Auch das Heroku-Frontend verwendet diese testonlyCerts, da die Verwendung von Umgebungsvariabeln im Dateiformat bei Heroku zusätzlich Geld kostet. Das Heroku-Deployment ist daher eher als 'Proof-of-Work' zu verstehen, seitdem das Heroku-Deployment keine Pflicht mehr ist.
 
 Bei Zugriff auf das Frontend über Heroku kann es bei Erstausführung zu Problemen kommen, da das Backend erst "geweckt" werden muss. Das liegt daran, dass Heroku die Anwendung nach Inaktivität herunterfährt.
 
